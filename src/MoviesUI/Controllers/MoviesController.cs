@@ -74,7 +74,8 @@ namespace MoviesUI.Controllers
         // GET: MovieController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Movie movie = dbContext.Movies.Find(id);
+            return View(movie);
         }
 
         // POST: MovieController/Edit/5
