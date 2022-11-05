@@ -1,0 +1,19 @@
+﻿@using MoviesCore
+@model Movie
+@{
+	ViewData["Title"] = "Delete";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Delete</h1>
+<div class="container">
+	<h4>
+		Do you really want to delete THIS WONDERFUL MOVIE?</h4>
+		<hr />
+		<dl class=row">
+		</dl>
+		<form method="post" asp-action="Delete">
+			<input type="hidden" asp-for="Id">
+			<input type="submit" value="Delete" class="btn btn-danger" />
+			<a asp-action="Index">Back</a>
+		</form>
+</div>
