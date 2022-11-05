@@ -48,25 +48,33 @@ namespace MoviesUI.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.Genres = new SelectList(dbContext.Genres.ToList());
+
+            ViewBag.Genres = dbContext.Genres.ToList();
             ViewBag.Directors = new SelectList(dbContext.Directors.ToList());
             return View();
         }
 
         // POST: MovieController/Create
         [HttpPost]
-        public ActionResult Create(Movie movie)
+        public ActionResult Create(Movie movie, int[] selectedGenres)
         {
-            var genre = dbContext.Genres.FirstOrDefault(x => x.Id == 1);
-            movie.Genres = new List<Genre> { genre };
+            //var genre = dbContext.Genres.FirstOrDefault(x => x.Id == 1);
+            //movie.Genres = new List<Genre> { genre };
 
-            var director = dbContext.Directors.FirstOrDefault(x => x.Id == 1);
-            movie.Directors = new List<Director> { director };
+            //var director = dbContext.Directors.FirstOrDefault(x => x.Id == 1);
+            //movie.Directors = new List<Director> { director };
 
-            var actor = dbContext.Actors.FirstOrDefault(x => x.Id == 1);
-            movie.Actors = new List<Actor> { actor };
-
-            dbContext.Add(movie);
+            //var actor = dbContext.Actors.FirstOrDefault(x => x.Id == 1);
+            //movie.Actors = new List<Actor> { actor };
+            if (selectedGenres != null)
+            {
+                foreach (var g in dbContext.Genres.Where(ge => selectedGenres.Contains(ge.Id)))
+                {
+                    movie.Genres.Add(g);
+                }
+            }
+            dbContext.Entry(movie).State = EntityState.Modified;
+            // dbContext.Add(movie);
             dbContext.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
@@ -74,13 +82,16 @@ namespace MoviesUI.Controllers
         // GET: MovieController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Movie movie = dbContext.Movies.Find(id);
+            if(movie == null) return NotFound();
+            ViewBag.Genres = dbContext.Genres.ToList();
+            return View(movie);
         }
 
         // POST: MovieController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Movie movie)
+        public ActionResult Edit(Movie movie, int[] selectedGenres)
         {
             if (movie.Id == null)
                 return NotFound();
@@ -92,6 +103,16 @@ namespace MoviesUI.Controllers
             edited.PosterPath = movie.PosterPath;
             edited.Duration = movie.Duration;
             edited.ReleaseYear = movie.ReleaseYear;
+            edited.Genres = new List<Genre>();
+            edited.Genres.Clear();
+            if (selectedGenres != null)
+            {
+                foreach (var g in dbContext.Genres.Where(ge => selectedGenres.Contains(ge.Id)))
+                {
+                    movie.Genres.Add(g);
+                }
+            }
+            dbContext.Entry(edited).State = EntityState.Modified;
             dbContext.SaveChanges();
             return RedirectToAction(nameof(Index));
         }

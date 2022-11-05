@@ -38,6 +38,14 @@
 			<input asp-for="Duration" class="form-control" />
 			<span asp-validation-for="Duration" class="text-danger"></span>
 		</div>
+		@{
+            List<Genre> genres = ViewBag.Genres;
+            foreach (Genre c in genres)
+            {
+                <input type="checkbox" name="selectedCourses" value="@c.Id"
+               @(Model.Genres.Contains(c) ? "checked=\"checked\"" : "") />@c.GenreName <br />
+            }
+        }
 		<div class="form-group">
 			<input type="submit" value="Create" class="btn btn-outline-success float-right" />
 		</div>
