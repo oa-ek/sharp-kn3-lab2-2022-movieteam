@@ -12,8 +12,7 @@ namespace MoviesCore
         public string? LastName { get; set; }
 
         public string? PhotoPath { get; set; }
-        public List<Movie>? Movies { get; set; }
-
+        public  virtual ICollection<Movie>? Movies { get; set; } = new List<Movie>();
         public override string ToString()
         {
             return $"{FirstName} {LastName} ";

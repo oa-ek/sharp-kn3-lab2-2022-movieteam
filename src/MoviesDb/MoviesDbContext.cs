@@ -24,11 +24,16 @@ namespace MoviesCore
                 .HasMany(x => x.Actors)
                 .WithMany(x => x.Movies);
 
+            builder.Entity<Course>()
+                .HasMany(c => c.Students)
+                .WithMany(s => s.Courses);
+
             builder.Seed();
             base.OnModelCreating(builder);
         }
 
-
+        public DbSet<Student>? Students { get; set; }
+        public DbSet<Course>? Courses { get; set; }
         public DbSet<Movie>? Movies { get; set; }
         public DbSet<Genre>? Genres { get; set; }
         public DbSet<Director>? Directors { get; set; }

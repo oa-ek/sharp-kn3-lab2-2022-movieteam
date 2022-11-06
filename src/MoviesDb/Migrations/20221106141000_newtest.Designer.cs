@@ -12,8 +12,8 @@ using MoviesCore;
 namespace MoviesCore.Migrations
 {
     [DbContext(typeof(MoviesDbContext))]
-    [Migration("20221018205836_seedTest")]
-    partial class seedTest
+    [Migration("20221106141000_newtest")]
+    partial class newtest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,21 @@ namespace MoviesCore.Migrations
                     b.HasIndex("MoviesId");
 
                     b.ToTable("ActorMovie");
+                });
+
+            modelBuilder.Entity("CourseStudent", b =>
+                {
+                    b.Property<int>("CoursesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CoursesId", "StudentsId");
+
+                    b.HasIndex("StudentsId");
+
+                    b.ToTable("CourseStudent");
                 });
 
             modelBuilder.Entity("DirectorMovie", b =>
@@ -98,15 +113,15 @@ namespace MoviesCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "67173906-410a-48c9-a2f5-ad4603263575",
-                            ConcurrencyStamp = "5f93bf11-267f-4093-bc52-8d238e6ff865",
+                            Id = "dd098bd2-5437-49b7-93b4-445b828129c4",
+                            ConcurrencyStamp = "327a96ad-7e97-473d-ad93-4cde79144dba",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4058fab6-953c-4dd6-aed6-dcd9599b1db8",
-                            ConcurrencyStamp = "c3f397d3-789d-4057-b991-4bb5b240c381",
+                            Id = "4cc48fb1-0b61-49a4-b06e-d370bc73fd68",
+                            ConcurrencyStamp = "b5d1af77-e13d-4f3a-adfc-7ce676dac03f",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -203,18 +218,18 @@ namespace MoviesCore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "d626bf8f-0510-47bc-9e52-7618c08a08d9",
-                            RoleId = "67173906-410a-48c9-a2f5-ad4603263575"
+                            UserId = "5f80a340-82f2-4cd7-8f66-cb8cb85c0da0",
+                            RoleId = "dd098bd2-5437-49b7-93b4-445b828129c4"
                         },
                         new
                         {
-                            UserId = "d626bf8f-0510-47bc-9e52-7618c08a08d9",
-                            RoleId = "4058fab6-953c-4dd6-aed6-dcd9599b1db8"
+                            UserId = "5f80a340-82f2-4cd7-8f66-cb8cb85c0da0",
+                            RoleId = "4cc48fb1-0b61-49a4-b06e-d370bc73fd68"
                         },
                         new
                         {
-                            UserId = "723357eb-76d2-4572-b47c-3209857cad0f",
-                            RoleId = "4058fab6-953c-4dd6-aed6-dcd9599b1db8"
+                            UserId = "67043fa0-890d-411d-9a8c-cfcc603720cf",
+                            RoleId = "4cc48fb1-0b61-49a4-b06e-d370bc73fd68"
                         });
                 });
 
@@ -253,9 +268,29 @@ namespace MoviesCore.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PhotoPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Actors");
+                });
+
+            modelBuilder.Entity("MoviesCore.Course", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("MoviesCore.Director", b =>
@@ -321,26 +356,6 @@ namespace MoviesCore.Migrations
                         {
                             Id = 3,
                             GenreName = "Detective"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            GenreName = "Criminal"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            GenreName = "Adventure"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            GenreName = "Comedy"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            GenreName = "Drama"
                         });
                 });
 
@@ -406,18 +421,27 @@ namespace MoviesCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PublisherCountries");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CountryName = "USA"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CountryName = "France"
-                        });
+            modelBuilder.Entity("MoviesCore.Student", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("MoviesCore.User", b =>
@@ -493,33 +517,33 @@ namespace MoviesCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d626bf8f-0510-47bc-9e52-7618c08a08d9",
+                            Id = "5f80a340-82f2-4cd7-8f66-cb8cb85c0da0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5e13801e-0bb7-456c-bb45-1d9886e65775",
+                            ConcurrencyStamp = "325f1f48-3bfc-4ecf-881c-199266a17eff",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO7Il8QSBPoH/mO8wpaziIIvoH1jBFdONA5+RJL5u48mAviBXHws4gwM/YZNKi2+OQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELB5uP9+BG/JI+sQQA6yrMuaiFgTFsetajOGaFoQqj/vuZsTkZxOkMh67LVFMBWV6A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3eccaaea-7646-4d2a-8299-5195f0b60f44",
+                            SecurityStamp = "1cd74e15-2cd0-4e08-8238-24708c7ff5dc",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
                         new
                         {
-                            Id = "723357eb-76d2-4572-b47c-3209857cad0f",
+                            Id = "67043fa0-890d-411d-9a8c-cfcc603720cf",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d7fc7e63-06a3-4883-a060-44e31380b82b",
+                            ConcurrencyStamp = "677e5f8e-53fc-4d64-baaf-448866a2953a",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGRKMpNoikY0YxJYsxw6Exg0bUxN+JJ2sgfedfyE64OQxdmUKDujfGtp6de/vpS9oA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAhDbyS1MlExDiHKn4tF7HqNKy9nGacn84ad8mU7QHEZ7EPFYeCIb58/0jxysPqYEg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0e0c3fa4-f2e8-4af8-b825-1c7badfc1092",
+                            SecurityStamp = "01e85a3d-e6b1-4003-9d03-bc15fb630791",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         });
@@ -536,6 +560,21 @@ namespace MoviesCore.Migrations
                     b.HasOne("MoviesCore.Movie", null)
                         .WithMany()
                         .HasForeignKey("MoviesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CourseStudent", b =>
+                {
+                    b.HasOne("MoviesCore.Course", null)
+                        .WithMany()
+                        .HasForeignKey("CoursesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MoviesCore.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

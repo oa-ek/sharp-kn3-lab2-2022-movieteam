@@ -12,10 +12,8 @@ namespace MoviesUI.Controllers
     public class MoviesController : Controller
     {
         private readonly MoviesDbContext dbContext;
-        private readonly MoviesRepository.MoviesRepository _moviesRepository;
         public MoviesController(MoviesDbContext dbContext)
         {
-
             this.dbContext = dbContext;
         }
         // GET: MovieController
@@ -82,34 +80,31 @@ namespace MoviesUI.Controllers
         // GET: MovieController/Edit/5
         public ActionResult Edit(int id)
         {
-            Movie movie = dbContext.Movies.Find(id);
-            if(movie == null) return NotFound();
+            Movie movie = dbContext.Movies.Include(x => x.Genres).FirstOrDefault(x => x.Id == id); ;
+            if (movie == null) return NotFound();
             ViewBag.Genres = dbContext.Genres.ToList();
             return View(movie);
         }
 
         // POST: MovieController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit(Movie movie, int[] selectedGenres)
         {
-            if (movie.Id == null)
-                return NotFound();
-
-            Movie edited = dbContext.Movies.FirstOrDefault(x => x.Id == movie.Id);
+              
+            Movie edited = dbContext.Movies.Include(x => x.Genres).FirstOrDefault(x => x.Id == movie.Id);
             edited.Title = movie.Title;
             edited.Description = movie.Description;
             edited.Rating = movie.Rating;
             edited.PosterPath = movie.PosterPath;
             edited.Duration = movie.Duration;
             edited.ReleaseYear = movie.ReleaseYear;
-            edited.Genres = new List<Genre>();
+
             edited.Genres.Clear();
             if (selectedGenres != null)
             {
                 foreach (var g in dbContext.Genres.Where(ge => selectedGenres.Contains(ge.Id)))
                 {
-                    movie.Genres.Add(g);
+                    edited.Genres.Add(g);
                 }
             }
             dbContext.Entry(edited).State = EntityState.Modified;
