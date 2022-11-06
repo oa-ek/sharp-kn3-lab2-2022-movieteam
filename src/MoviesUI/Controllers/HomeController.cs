@@ -1,23 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MoviesCore;
 using MoviesUI.Models;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace MoviesUI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly MoviesDbContext dbContext;
+        public HomeController(MoviesDbContext dbContext)
         {
-            _logger = logger;
+            this.dbContext = dbContext;
         }
 
         public IActionResult Index()
         {
             return View();
         }
-
+        
         public IActionResult Privacy()
         {
             return View();

@@ -16,11 +16,9 @@ namespace MoviesCore
         public int ReleaseYear { get; set; }
         public int Duration { get; set; }
 
-        public List<Genre>? Genres { get; set; }
-        public List<Director>? Directors { get; set; }
-
-        public List<Actor>? Actors { get; set; }
-
+        public virtual ICollection<Genre>? Genres { get; set; } = new List<Genre>();
+        public virtual ICollection<Director>? Directors { get; set; } = new List<Director>();
+        public virtual ICollection<Actor>? Actors { get; set; } = new List<Actor>();
         public override string ToString()
         {
             return $"{Title}";

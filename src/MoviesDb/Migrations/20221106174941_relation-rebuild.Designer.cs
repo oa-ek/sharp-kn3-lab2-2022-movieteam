@@ -12,8 +12,8 @@ using MoviesCore;
 namespace MoviesCore.Migrations
 {
     [DbContext(typeof(MoviesDbContext))]
-    [Migration("20221019161309_data-update")]
-    partial class dataupdate
+    [Migration("20221106174941_relation-rebuild")]
+    partial class relationrebuild
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -98,15 +98,15 @@ namespace MoviesCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "31575944-82e6-4254-98c6-bd2423140a7c",
-                            ConcurrencyStamp = "7c4b731e-fc67-4d73-95a7-a428307be68a",
+                            Id = "bf9fc6dc-f3f9-42b7-95f2-2878eaebe826",
+                            ConcurrencyStamp = "d25b0b9c-a0e9-4d10-ac65-698455227826",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "daa54c14-57e2-4391-8ae7-d039eaf5f571",
-                            ConcurrencyStamp = "f91d20e4-0248-40bb-9c24-1c12ee98f60b",
+                            Id = "1605ae69-58a9-48d9-978c-96ec02d273cd",
+                            ConcurrencyStamp = "b70f65b0-8777-47e9-8b43-2ef764a8f866",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -203,18 +203,18 @@ namespace MoviesCore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "ec16222f-cfb7-4f78-ba85-3b526b546374",
-                            RoleId = "31575944-82e6-4254-98c6-bd2423140a7c"
+                            UserId = "707e4e02-dec4-4e91-bbd1-8985b071c4fb",
+                            RoleId = "bf9fc6dc-f3f9-42b7-95f2-2878eaebe826"
                         },
                         new
                         {
-                            UserId = "ec16222f-cfb7-4f78-ba85-3b526b546374",
-                            RoleId = "daa54c14-57e2-4391-8ae7-d039eaf5f571"
+                            UserId = "707e4e02-dec4-4e91-bbd1-8985b071c4fb",
+                            RoleId = "1605ae69-58a9-48d9-978c-96ec02d273cd"
                         },
                         new
                         {
-                            UserId = "465643e7-1659-41fa-8c96-0a8f9722915d",
-                            RoleId = "daa54c14-57e2-4391-8ae7-d039eaf5f571"
+                            UserId = "376d3259-ec1e-4877-87db-e140fa67462a",
+                            RoleId = "1605ae69-58a9-48d9-978c-96ec02d273cd"
                         });
                 });
 
@@ -464,33 +464,33 @@ namespace MoviesCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ec16222f-cfb7-4f78-ba85-3b526b546374",
+                            Id = "707e4e02-dec4-4e91-bbd1-8985b071c4fb",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ba6bfa64-a308-4182-86d5-b00e2bff4afa",
+                            ConcurrencyStamp = "c451b330-f79d-48cf-b38d-61eba663c8c6",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIv6Nxmgdzhs05aRXgouX3PW7V4wld+EJwTxIFJI2e7h7dHhlt/XsLZ6N1WIbzR6dQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH0qRMIZwxS2pbpWiaAHz7U38GmFcF6DkEA83y5vib16IviUTW+2eBHkEu0OlS2oQQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "df5e290a-6e5b-4b8c-a807-ec9f6e9837ba",
+                            SecurityStamp = "83013d5a-b36f-4c89-acb3-8985ec11513f",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
                         new
                         {
-                            Id = "465643e7-1659-41fa-8c96-0a8f9722915d",
+                            Id = "376d3259-ec1e-4877-87db-e140fa67462a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "29a69411-a2d7-481f-ac78-4f8dd9b1d8ee",
+                            ConcurrencyStamp = "04a46f87-11f5-4971-a640-3f90b26abba4",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAzdZeu/sxLDug3cq056RQEejCaBZD2vAygJI24PxCdwQi7k9y8sZSzV9IRw8nuvdA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJyqju6E/dvTcUKmh0yEmUGswhGAZTLMnDdqvtB7Hc4LdzHvXesiD17HK52vimp6uA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0fffe3d0-d8c7-4202-9881-c0635d38e954",
+                            SecurityStamp = "22f4addd-831f-4d82-8236-26173962e036",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         });

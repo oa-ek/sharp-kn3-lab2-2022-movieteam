@@ -12,6 +12,7 @@ namespace MoviesUI.Controllers
         }
         public IActionResult Index()
         {
+
             var Chris = new Actor { FirstName = "Chris", LastName = " Evans", PhotoPath = "https://upload.wikimedia.org/wikipedia/commons/8/89/Chris_Evans_2020_%28cropped%29.jpg" };
             var Ryan = new Actor { FirstName = "Ryan", LastName = "Reynolds", PhotoPath = "https://upload.wikimedia.org/wikipedia/commons/1/14/Deadpool_2_Japan_Premiere_Red_Carpet_Ryan_Reynolds_%28cropped%29.jpg" };
 
@@ -55,7 +56,8 @@ namespace MoviesUI.Controllers
             Chris.Movies = new List<Movie> { AceVentura, Avengers };
             Ryan.Movies = new List<Movie> { AceVentura, Avengers };
 
-            dbContext.AddRange(Chris, Ryan, USA, Germany, James, Comedy, Drama, AceVentura, Avengers);
+
+            dbContext.AddRange(Chris, Ryan, USA, Germany, James, Comedy, Drama, AceVentura, Avengers);           
             dbContext.SaveChanges();
 
             return Redirect("/Home/Index");
