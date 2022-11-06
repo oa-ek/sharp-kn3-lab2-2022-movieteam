@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MoviesCore.Migrations
 {
-    public partial class newtest : Migration
+    public partial class relationrebuild : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,19 +66,6 @@ namespace MoviesCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Courses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Courses", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Directors",
                 columns: table => new
                 {
@@ -116,20 +103,6 @@ namespace MoviesCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PublisherCountries", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Students",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Students", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -263,30 +236,6 @@ namespace MoviesCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CourseStudent",
-                columns: table => new
-                {
-                    CoursesId = table.Column<int>(type: "int", nullable: false),
-                    StudentsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CourseStudent", x => new { x.CoursesId, x.StudentsId });
-                    table.ForeignKey(
-                        name: "FK_CourseStudent_Courses_CoursesId",
-                        column: x => x.CoursesId,
-                        principalTable: "Courses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CourseStudent_Students_StudentsId",
-                        column: x => x.StudentsId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ActorMovie",
                 columns: table => new
                 {
@@ -363,8 +312,8 @@ namespace MoviesCore.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4cc48fb1-0b61-49a4-b06e-d370bc73fd68", "b5d1af77-e13d-4f3a-adfc-7ce676dac03f", "User", "USER" },
-                    { "dd098bd2-5437-49b7-93b4-445b828129c4", "327a96ad-7e97-473d-ad93-4cde79144dba", "Admin", "ADMIN" }
+                    { "1605ae69-58a9-48d9-978c-96ec02d273cd", "b70f65b0-8777-47e9-8b43-2ef764a8f866", "User", "USER" },
+                    { "bf9fc6dc-f3f9-42b7-95f2-2878eaebe826", "d25b0b9c-a0e9-4d10-ac65-698455227826", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -372,8 +321,8 @@ namespace MoviesCore.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "5f80a340-82f2-4cd7-8f66-cb8cb85c0da0", 0, "325f1f48-3bfc-4ecf-881c-199266a17eff", "admin@gmail.com", true, null, null, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAELB5uP9+BG/JI+sQQA6yrMuaiFgTFsetajOGaFoQqj/vuZsTkZxOkMh67LVFMBWV6A==", null, false, "1cd74e15-2cd0-4e08-8238-24708c7ff5dc", false, "admin@gmail.com" },
-                    { "67043fa0-890d-411d-9a8c-cfcc603720cf", 0, "677e5f8e-53fc-4d64-baaf-448866a2953a", "user@gmail.com", true, null, null, false, null, "USER@GMAIL.COM", "USER@GMAIL.COM", "AQAAAAEAACcQAAAAEAhDbyS1MlExDiHKn4tF7HqNKy9nGacn84ad8mU7QHEZ7EPFYeCIb58/0jxysPqYEg==", null, false, "01e85a3d-e6b1-4003-9d03-bc15fb630791", false, "user@gmail.com" }
+                    { "376d3259-ec1e-4877-87db-e140fa67462a", 0, "04a46f87-11f5-4971-a640-3f90b26abba4", "user@gmail.com", true, null, null, false, null, "USER@GMAIL.COM", "USER@GMAIL.COM", "AQAAAAEAACcQAAAAEJyqju6E/dvTcUKmh0yEmUGswhGAZTLMnDdqvtB7Hc4LdzHvXesiD17HK52vimp6uA==", null, false, "22f4addd-831f-4d82-8236-26173962e036", false, "user@gmail.com" },
+                    { "707e4e02-dec4-4e91-bbd1-8985b071c4fb", 0, "c451b330-f79d-48cf-b38d-61eba663c8c6", "admin@gmail.com", true, null, null, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEH0qRMIZwxS2pbpWiaAHz7U38GmFcF6DkEA83y5vib16IviUTW+2eBHkEu0OlS2oQQ==", null, false, "83013d5a-b36f-4c89-acb3-8985ec11513f", false, "admin@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -403,17 +352,17 @@ namespace MoviesCore.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "4cc48fb1-0b61-49a4-b06e-d370bc73fd68", "5f80a340-82f2-4cd7-8f66-cb8cb85c0da0" });
+                values: new object[] { "1605ae69-58a9-48d9-978c-96ec02d273cd", "376d3259-ec1e-4877-87db-e140fa67462a" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "dd098bd2-5437-49b7-93b4-445b828129c4", "5f80a340-82f2-4cd7-8f66-cb8cb85c0da0" });
+                values: new object[] { "1605ae69-58a9-48d9-978c-96ec02d273cd", "707e4e02-dec4-4e91-bbd1-8985b071c4fb" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "4cc48fb1-0b61-49a4-b06e-d370bc73fd68", "67043fa0-890d-411d-9a8c-cfcc603720cf" });
+                values: new object[] { "bf9fc6dc-f3f9-42b7-95f2-2878eaebe826", "707e4e02-dec4-4e91-bbd1-8985b071c4fb" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActorMovie_MoviesId",
@@ -460,11 +409,6 @@ namespace MoviesCore.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseStudent_StudentsId",
-                table: "CourseStudent",
-                column: "StudentsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_DirectorMovie_MoviesId",
                 table: "DirectorMovie",
                 column: "MoviesId");
@@ -501,9 +445,6 @@ namespace MoviesCore.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CourseStudent");
-
-            migrationBuilder.DropTable(
                 name: "DirectorMovie");
 
             migrationBuilder.DropTable(
@@ -517,12 +458,6 @@ namespace MoviesCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Courses");
-
-            migrationBuilder.DropTable(
-                name: "Students");
 
             migrationBuilder.DropTable(
                 name: "Directors");

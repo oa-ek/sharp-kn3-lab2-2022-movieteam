@@ -57,34 +57,7 @@ namespace MoviesUI.Controllers
             Ryan.Movies = new List<Movie> { AceVentura, Avengers };
 
 
-            dbContext.AddRange(Chris, Ryan, USA, Germany, James, Comedy, Drama, AceVentura, Avengers);
-            Student s1 = new Student { Name = "Егор", Surname = "Иванов" };
-            Student s2 = new Student {  Name = "Мария", Surname = "Васильева" };
-            Student s3 = new Student { Name = "Олег", Surname = "Кузнецов" };
-            Student s4 = new Student { Name = "Ольга", Surname = "Петрова" };
-
-
-
-            Course c1 = new Course
-            {
-
-                Name = "Операционные системы",
-                Students = new List<Student>() { s1, s2, s3 }
-            };
-            Course c2 = new Course
-            {
-                Name = "Алгоритмы и структуры данных",
-                Students = new List<Student>() { s2, s4 }
-            };
-            Course c3 = new Course
-            {
-
-                Name = "Основы HTML и CSS",
-                Students = new List<Student>() { s3, s4, s1 }
-            };
-
-
-            dbContext.AddRange(s1, s2, s3, s4, c1, c2, c3);
+            dbContext.AddRange(Chris, Ryan, USA, Germany, James, Comedy, Drama, AceVentura, Avengers);           
             dbContext.SaveChanges();
 
             return Redirect("/Home/Index");

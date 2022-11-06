@@ -46,7 +46,6 @@ namespace MoviesUI.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-
             ViewBag.Genres = dbContext.Genres.ToList();
             ViewBag.Directors = new SelectList(dbContext.Directors.ToList());
             return View();
