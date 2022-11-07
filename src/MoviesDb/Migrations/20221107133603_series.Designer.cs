@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoviesCore;
 
@@ -11,9 +12,10 @@ using MoviesCore;
 namespace MoviesCore.Migrations
 {
     [DbContext(typeof(MoviesDbContext))]
-    partial class MoviesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221107133603_series")]
+    partial class series
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,15 +98,15 @@ namespace MoviesCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e9c42a9c-d52b-4c0c-9656-a661211b6ff2",
-                            ConcurrencyStamp = "41266aff-3432-4a3f-9a2c-727992ffe640",
+                            Id = "fa8ce995-8f77-413a-8be2-df2cb157ca55",
+                            ConcurrencyStamp = "bd067906-e79b-4698-a285-0341b124148f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "446a5531-d3c4-4607-94f9-ae4271529f70",
-                            ConcurrencyStamp = "b4e62473-f1ce-418b-ada0-7ed73ffd78c3",
+                            Id = "896f1059-1c01-405b-bca5-ac6eea8622dc",
+                            ConcurrencyStamp = "8c31ee87-75f9-4bb2-848a-10b7d8383a1a",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -201,18 +203,18 @@ namespace MoviesCore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "21b54ce2-ab7c-4458-b43e-1b4dd4acff53",
-                            RoleId = "e9c42a9c-d52b-4c0c-9656-a661211b6ff2"
+                            UserId = "1ca66c4e-d962-492e-a2a8-420af4dab53c",
+                            RoleId = "fa8ce995-8f77-413a-8be2-df2cb157ca55"
                         },
                         new
                         {
-                            UserId = "21b54ce2-ab7c-4458-b43e-1b4dd4acff53",
-                            RoleId = "446a5531-d3c4-4607-94f9-ae4271529f70"
+                            UserId = "1ca66c4e-d962-492e-a2a8-420af4dab53c",
+                            RoleId = "896f1059-1c01-405b-bca5-ac6eea8622dc"
                         },
                         new
                         {
-                            UserId = "6b155db3-30f2-491a-a133-95e10729df23",
-                            RoleId = "446a5531-d3c4-4607-94f9-ae4271529f70"
+                            UserId = "3f0b7e17-7759-4198-83e0-bcbfc8ec617c",
+                            RoleId = "896f1059-1c01-405b-bca5-ac6eea8622dc"
                         });
                 });
 
@@ -333,9 +335,6 @@ namespace MoviesCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("CountryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -344,6 +343,9 @@ namespace MoviesCore.Migrations
 
                     b.Property<string>("PosterPath")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PublisherCountryId")
+                        .HasColumnType("int");
 
                     b.Property<float?>("Rating")
                         .HasColumnType("real");
@@ -357,14 +359,12 @@ namespace MoviesCore.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("TypeId");
+                    b.HasIndex("PublisherCountryId");
 
                     b.ToTable("Movies");
 
@@ -395,22 +395,6 @@ namespace MoviesCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PublisherCountries");
-                });
-
-            modelBuilder.Entity("MoviesCore.Type", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("TypeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Types");
                 });
 
             modelBuilder.Entity("MoviesCore.User", b =>
@@ -486,33 +470,33 @@ namespace MoviesCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "21b54ce2-ab7c-4458-b43e-1b4dd4acff53",
+                            Id = "1ca66c4e-d962-492e-a2a8-420af4dab53c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7d3338bc-e670-4952-b687-7863c79f9568",
+                            ConcurrencyStamp = "4ab27bb3-d110-462c-9d0a-0266d7fe1d1f",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENsqA5gSzTLDxClkK07q7kA5eloyJZJFBAzhn8OGHpTjSfol7QUGh2JQai5LL7Ydlg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ8jDFLopB6+hKqw6KR7rcUvU9DWUu9NZTAZHuDu5gp4Zp/Y+EqpwSvKViC0HYzsxQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3be2f2d9-9976-4f3a-ac96-432027042a34",
+                            SecurityStamp = "e8bb124d-c48d-41f6-8b06-7b3108a2c4e2",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
                         new
                         {
-                            Id = "6b155db3-30f2-491a-a133-95e10729df23",
+                            Id = "3f0b7e17-7759-4198-83e0-bcbfc8ec617c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "939c7152-a3ac-4d44-9b0d-3302c92fd617",
+                            ConcurrencyStamp = "3736a4fc-9cd4-4bf7-ab17-ea66e4ea97e8",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEL6/Gm5qcbJkLl6W2xy8d6Nuh2/Zz/BvpqCOyl6hUF4nGewPs2Hdw8D98S4V4IO+gw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENbhaUsw16b92v8+v/iuPjsEFqQrK+03IQwBBF0Cw/Krt8kRY5WlScLSIGklLab3fQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "70ee17bb-3953-4001-aaa5-9d48ab3d3a0c",
+                            SecurityStamp = "49848b1c-3989-4b75-8f71-bb3f153fdbd9",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         });
@@ -616,25 +600,12 @@ namespace MoviesCore.Migrations
 
             modelBuilder.Entity("MoviesCore.Movie", b =>
                 {
-                    b.HasOne("MoviesCore.PublisherCountry", "Country")
+                    b.HasOne("MoviesCore.PublisherCountry", null)
                         .WithMany("Movies")
-                        .HasForeignKey("CountryId");
-
-                    b.HasOne("MoviesCore.Type", "Type")
-                        .WithMany("Movies")
-                        .HasForeignKey("TypeId");
-
-                    b.Navigation("Country");
-
-                    b.Navigation("Type");
+                        .HasForeignKey("PublisherCountryId");
                 });
 
             modelBuilder.Entity("MoviesCore.PublisherCountry", b =>
-                {
-                    b.Navigation("Movies");
-                });
-
-            modelBuilder.Entity("MoviesCore.Type", b =>
                 {
                     b.Navigation("Movies");
                 });

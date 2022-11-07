@@ -32,5 +32,6 @@ namespace MoviesCore
         public DbSet<Director>? Directors { get; set; }
         public DbSet<PublisherCountry>? PublisherCountries { get; set; }
         public DbSet<Actor>? Actors { get; set; }
+        public DbSet<Type>? Types { get; set; }
     }
 }

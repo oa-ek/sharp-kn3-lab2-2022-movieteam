@@ -22,6 +22,7 @@ namespace MoviesUI.Controllers
             var MoviesWithEv = dbContext.Movies
                 .Include(x => x.Genres)
                 .Include(x => x.Directors)
+                .Include(x => x.Country)
                 .ToList();
 
             return View(MoviesWithEv);
@@ -36,6 +37,7 @@ namespace MoviesUI.Controllers
                 .Include(x => x.Directors)
                 .Include(x => x.Actors)
                 .Include(x => x.Genres)
+                .Include(x => x.Country)
                 .FirstOrDefault(x => x.Id == id);
             if (movie == null) return NotFound();
 
@@ -47,31 +49,28 @@ namespace MoviesUI.Controllers
         public ActionResult Create()
         {
             ViewBag.Genres = dbContext.Genres.ToList();
-            ViewBag.Directors = new SelectList(dbContext.Directors.ToList());
+            ViewBag.Types = new SelectList(dbContext.Types.ToList());
             return View();
         }
 
         // POST: MovieController/Create
         [HttpPost]
-        public ActionResult Create(Movie movie, int[] selectedGenres)
+        public ActionResult Create(Movie movie, int[] selectedGenres, int selectedType)
         {
-            //var genre = dbContext.Genres.FirstOrDefault(x => x.Id == 1);
-            //movie.Genres = new List<Genre> { genre };
-
-            //var director = dbContext.Directors.FirstOrDefault(x => x.Id == 1);
-            //movie.Directors = new List<Director> { director };
-
-            //var actor = dbContext.Actors.FirstOrDefault(x => x.Id == 1);
-            //movie.Actors = new List<Actor> { actor };
+            
             if (selectedGenres != null)
             {
+                movie.Genres = new List<Genre>();
                 foreach (var g in dbContext.Genres.Where(ge => selectedGenres.Contains(ge.Id)))
                 {
                     movie.Genres.Add(g);
                 }
             }
-            dbContext.Entry(movie).State = EntityState.Modified;
-            // dbContext.Add(movie);
+            if (selectedType != 0)
+            {
+               
+            }
+            dbContext.Movies.Add(movie);
             dbContext.SaveChanges();
             return RedirectToAction(nameof(Index));
         }

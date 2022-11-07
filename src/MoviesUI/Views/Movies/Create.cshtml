@@ -39,23 +39,20 @@
 			<input asp-for="Duration" class="form-control" />
 			<span asp-validation-for="Duration" class="text-danger"></span>
 		</div>
-		@* Genres try 
 
-		<div class="form-group">
-			<label asp-for="Genres" class="control-label"></label>
-			<select asp-for="Genres" name="genreId" asp-items="ViewBag.Genres"></select>
-			<span asp-validation-for="Genres" class="text-danger"></span>
-		</div>*@
 		@{
-            List<Genre> genres = ViewBag.Genres;
-            foreach (Genre c in genres)
-            {
-                <input type="checkbox" name="selectedCourses" value="@c.Id"
-               @(Model.Genres.Contains(c) ? "checked=\"checked\"" : "") />@c.GenreName <br />
-            }
-        }
+			List<Genre> genres = ViewBag.Genres;
+			foreach (Genre c in genres)
+			{
+				<input type="checkbox" name="selectedGenres" value="@c.Id" />
 
-		
+				@c.GenreName <br />
+			}
+		}
+		<br />
+		@{
+			<select name="selectedType" asp-items="ViewBag.Types"></select>
+		}
 		<div class="form-group">
 			<label asp-for="Directors" class="control-label"></label>
 			<select asp-for="Directors" name="DirectorId" asp-items="ViewBag.Directors"></select>
