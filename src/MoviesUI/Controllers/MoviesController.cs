@@ -38,6 +38,7 @@ namespace MoviesUI.Controllers
                 .Include(x => x.Actors)
                 .Include(x => x.Genres)
                 .Include(x => x.Country)
+                .Include(x => x.Type)
                 .FirstOrDefault(x => x.Id == id);
             if (movie == null) return NotFound();
 
@@ -49,13 +50,14 @@ namespace MoviesUI.Controllers
         public ActionResult Create()
         {
             ViewBag.Genres = dbContext.Genres.ToList();
-            ViewBag.Types = new SelectList(dbContext.Types.ToList());
+            ViewBag.Types = dbContext.Types.ToList();
+            ViewBag.Contries = dbContext.PublisherCountries.ToList();
             return View();
         }
 
         // POST: MovieController/Create
         [HttpPost]
-        public ActionResult Create(Movie movie, int[] selectedGenres, int selectedType)
+        public ActionResult Create(Movie movie, int[] selectedGenres, int selectedType, int selectedCountry)
         {
             
             if (selectedGenres != null)
@@ -68,7 +70,11 @@ namespace MoviesUI.Controllers
             }
             if (selectedType != 0)
             {
-               
+                movie.Type = dbContext.Types.FirstOrDefault(x => x.Id == selectedType);
+            }
+            if (selectedType != 0)
+            {
+                movie.Country = dbContext.PublisherCountries.FirstOrDefault(x => x.Id == selectedCountry);
             }
             dbContext.Movies.Add(movie);
             dbContext.SaveChanges();

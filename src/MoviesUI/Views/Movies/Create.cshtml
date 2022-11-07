@@ -45,19 +45,28 @@
 			foreach (Genre c in genres)
 			{
 				<input type="checkbox" name="selectedGenres" value="@c.Id" />
-
 				@c.GenreName <br />
 			}
 		}
 		<br />
 		@{
-			<select name="selectedType" asp-items="ViewBag.Types"></select>
+			List<MoviesCore.Type> types = ViewBag.Types;
+			<select name="selectedType">
+				@foreach (var item in types)
+				{
+					<option value="@item.Id">@item.TypeName</option>
+				}
+			</select>
 		}
-		<div class="form-group">
-			<label asp-for="Directors" class="control-label"></label>
-			<select asp-for="Directors" name="DirectorId" asp-items="ViewBag.Directors"></select>
-			<span asp-validation-for="Genres" class="text-danger"></span>
-		</div>
+		@{
+			List<PublisherCountry> countries = ViewBag.Contries;
+			<select name="selectedCountry">
+				@foreach (var item in countries)
+				{
+					<option value="@item.Id">@item.CountryName</option>
+				}
+			</select>
+		}
 		<div class="form-group">
 			<input type="submit" value="Create" class="btn btn-outline-success float-right" />
 		</div>
