@@ -1,11 +1,20 @@
 ﻿@model IEnumerable<MoviesCore.Movie>
-
-@{
-
-}
 <div class="row-cols-auto">
 	<a class="nav-link text-dark text-center" asp-area="" asp-controller="Movies" asp-action="Create">Add new movie </a>
 </div>
+<div class="container">
+<div class="row-cols-auto">
+
+	<form method="get" asp-action="Index">
+		<p>
+			<input type="search" placeholder="enter query" value="@ViewData["GetMoviesDetails"]" name="movieSearch" style="width:500px;" />
+			<input type="submit" value="Search" class="btn btn-primary" />
+			<a asp-action="Index">Reset</a>
+		</p>
+	</form>
+</div>
+</div>
+
 <div class="container">
 	<div class="row m-3">
 		@foreach (var item in Model)
