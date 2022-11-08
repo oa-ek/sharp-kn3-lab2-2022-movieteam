@@ -21,13 +21,23 @@ namespace MoviesUI.Controllers
         {
             var MoviesWithEv = dbContext.Movies
                 .Include(x => x.Genres)
-                .Include(x => x.Directors)
                 .Include(x => x.Country)
                 .ToList();
 
             return View(MoviesWithEv);
         }
+        [HttpGet]
+        public async Task<IActionResult> Index(string movieSearch)
+        {
+            ViewData["GetMoviesDetails"] = movieSearch;
 
+            var mquery = from x in dbContext.Movies select x;
+            if(!String.IsNullOrEmpty(movieSearch))
+            {
+                mquery = mquery.Where(x => x.Title.Contains(movieSearch));
+            }
+            return View(await mquery.Include(x => x.Genres).ToListAsync());
+        }
         // GET: MovieController/Details/5
         public ActionResult Details(int? id)
         {
