@@ -12,27 +12,35 @@
 			<p>Director: @Html.DisplayFor(modelItem => Model.Directors)</p>
 			<p>Genres: @Html.DisplayFor(modelItem => Model.Genres)</p>
 			<p>Movie Duration: @Html.DisplayFor(modelItem => Model.Duration) min</p>
-			<p>IMDB Raiting: @Html.DisplayFor(modelItem => Model.Rating) </p>
-			<p>Year: @Html.DisplayFor(modelItem => Model.ReleaseYear) </p>
+			<p>Raiting: @Html.DisplayFor(modelItem => Model.Rating) </p>
+			<p class="imdb">Year: @Html.DisplayFor(modelItem => Model.ReleaseYear) </p>
 			<p class="card-text">Country: @Html.DisplayFor(modelItem => Model.Country.CountryName)</p>
 			<p class="card-text">Type: @Html.DisplayFor(modelItem => Model.Type.TypeName)</p>
+			<p class="imdb" id="target"></p>
 		</div>
 	</div>
 </div>
 @section Scripts {
-
+	@*Uncomment section below to load imdb raiting for this movie, due to restricted number of requests to api*@
 	@*<script>
+		const str = "@Model.Title"
+		console.log(str)
 		const options = {
 		method: 'GET',
 		headers: {
 		'X-RapidAPI-Key': 'a2a8223e0fmsh05cc764b858ebefp1d1ed3jsn0235c9321f19',
 		'X-RapidAPI-Host': 'moviesdb5.p.rapidapi.com'
-	}
-};
+		}
+	};
+	const trgt = document.getElementById("target")
+	console.log(trgt)
 
-	fetch('https://moviesdb5.p.rapidapi.com/om?t=Interstellar', options)
+	fetch(`https://moviesdb5.p.rapidapi.com/om?t=${str}`, options)
 	.then(response => response.json())
-	.then(response => console.log(response))
+	.then(response => {
+		trgt.innerHTML = response.imdbRating ? "Imdb Rating :"+response.imdbRating : "No raiting for this movie :("
+		console.log(response)
+	})
 	.catch(err => console.error(err));
 	</script>*@
 }
