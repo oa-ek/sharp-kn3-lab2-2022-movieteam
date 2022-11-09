@@ -6,5 +6,6 @@ namespace MoviesCore
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+        public virtual ICollection<Bookmark>? Bookmarks { get; set; } = new List<Bookmark>();
     }
 }

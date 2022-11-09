@@ -33,5 +33,6 @@ namespace MoviesCore
         public DbSet<PublisherCountry>? PublisherCountries { get; set; }
         public DbSet<Actor>? Actors { get; set; }
         public DbSet<Type>? Types { get; set; }
+        public DbSet<Bookmark>? Bookmarks { get; set; }
     }
 }

@@ -1,0 +1,25 @@
+﻿@page
+@using MoviesCore
+@using MoviesUI.Areas.Identity.Pages.Account.Manage
+@model IEnumerable<Bookmark>
+@{
+	ViewData["Title"] = "Saved Films";
+}
+
+<h4>@ViewData["Title"]</h4>
+@foreach (var b in Model)
+{
+	<div class="col-3">
+		<div class="card" style="width: 18rem;">
+			<img class="card-img-top" src=@Html.DisplayFor(modelItem => b.Movie.PosterPath) alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">@Html.DisplayFor(modelItem => b.Movie.Title)</h5>
+				<p class="card-text">@Html.DisplayFor(modelItem => b.Movie.Description)</p>
+				<p class="card-text">@Html.DisplayFor(modelItem => b.Movie.Genres)</p>
+				<a asp-action="Details" asp-route-id="@b.Movie.Id" class="btn btn-primary">View Details</a>
+				<a asp-action="Delete" asp-route-id="@b.Movie.Id" class="btn btn-danger">Delete</a>
+				<a asp-action="Edit" asp-route-id="@b.Movie.Id" class="btn btn-warning">Edit</a>
+			</div>
+		</div>
+	</div>
+}

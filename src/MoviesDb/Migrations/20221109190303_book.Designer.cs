@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoviesCore;
 
@@ -11,9 +12,10 @@ using MoviesCore;
 namespace MoviesCore.Migrations
 {
     [DbContext(typeof(MoviesDbContext))]
-    partial class MoviesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221109190303_book")]
+    partial class book
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,15 +98,15 @@ namespace MoviesCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f3817d61-f7a3-4e4b-aee4-b3cf2c010188",
-                            ConcurrencyStamp = "52a239e9-0a44-458c-b36b-ec12f4f70116",
+                            Id = "821a939f-f679-44b7-b092-7201104e8e80",
+                            ConcurrencyStamp = "e4916ce0-2f43-4144-aaff-d69d4bcfad92",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "cc493cc1-5f47-48fe-acc3-3b0cad9ed579",
-                            ConcurrencyStamp = "b32abe70-0f9f-463c-875a-cdbeddefbc5a",
+                            Id = "6811a75d-6717-4ae0-a40e-9eb41cd303b7",
+                            ConcurrencyStamp = "ea4f7bfd-c21f-4cb8-a75f-6bc5a391231b",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -201,18 +203,18 @@ namespace MoviesCore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "ba95939b-8511-49b1-bd46-fd1c274478e9",
-                            RoleId = "f3817d61-f7a3-4e4b-aee4-b3cf2c010188"
+                            UserId = "6ff0a98d-3e84-462c-bbc0-d5b40e4d4f11",
+                            RoleId = "821a939f-f679-44b7-b092-7201104e8e80"
                         },
                         new
                         {
-                            UserId = "ba95939b-8511-49b1-bd46-fd1c274478e9",
-                            RoleId = "cc493cc1-5f47-48fe-acc3-3b0cad9ed579"
+                            UserId = "6ff0a98d-3e84-462c-bbc0-d5b40e4d4f11",
+                            RoleId = "6811a75d-6717-4ae0-a40e-9eb41cd303b7"
                         },
                         new
                         {
-                            UserId = "babe79a9-c3c8-45c1-9d25-4ba818e31c3a",
-                            RoleId = "cc493cc1-5f47-48fe-acc3-3b0cad9ed579"
+                            UserId = "34c58b59-64dc-4671-938a-dd42a69cae04",
+                            RoleId = "6811a75d-6717-4ae0-a40e-9eb41cd303b7"
                         });
                 });
 
@@ -509,33 +511,33 @@ namespace MoviesCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ba95939b-8511-49b1-bd46-fd1c274478e9",
+                            Id = "6ff0a98d-3e84-462c-bbc0-d5b40e4d4f11",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f75f8b98-52be-450a-aad5-8461170c62cb",
+                            ConcurrencyStamp = "c98f02a3-9893-4e8f-a8ba-d6beccd1491f",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPRu7V0HuYRMLIEQjPemJgK0gVRiOIQi37LLvo/ZVO/utRd4za8IKELGI8wSSL9Fcw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOZzVeDeyDNphy9kNl5ukmLhIrlg6PKYVX91dqdEWKa8uRE0ux1JkWmWgOvuciRO0g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7f54f09b-7301-4dd2-b1b0-8e54a5b06b8e",
+                            SecurityStamp = "e98238e4-0d3c-435f-a75d-f3e209ab36c1",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
                         new
                         {
-                            Id = "babe79a9-c3c8-45c1-9d25-4ba818e31c3a",
+                            Id = "34c58b59-64dc-4671-938a-dd42a69cae04",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4e04c01a-b6d1-449d-b0c3-b15098de5235",
+                            ConcurrencyStamp = "2aa22281-56a2-4299-867a-f429d7af1414",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPPk/G56FwKfrFM+3WEaM7x4f2jlQSutbHPvFClGXsK7PqtCkRKZ4jpJhLimDRtslQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHBCJI+a2eXyJmr/Y/U3J06b3dnAJfEJdihpL94fBkFoxMM/Ym8Ud3tAz7F+X+sGsA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1e1c87e1-5641-43c8-a7c4-3f84091dfdf5",
+                            SecurityStamp = "5d13b879-6cc7-4502-90fd-9718ea2b81bd",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         });
@@ -644,7 +646,7 @@ namespace MoviesCore.Migrations
                         .HasForeignKey("MovieId");
 
                     b.HasOne("MoviesCore.User", "User")
-                        .WithMany("Bookmarks")
+                        .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("Movie");
@@ -675,11 +677,6 @@ namespace MoviesCore.Migrations
             modelBuilder.Entity("MoviesCore.Type", b =>
                 {
                     b.Navigation("Movies");
-                });
-
-            modelBuilder.Entity("MoviesCore.User", b =>
-                {
-                    b.Navigation("Bookmarks");
                 });
 #pragma warning restore 612, 618
         }
