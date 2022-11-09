@@ -93,12 +93,12 @@ namespace MoviesUI.Controllers
                 using(FileStream stream = new FileStream(PicturePath, FileMode.Create))
                 Image.CopyTo(stream);
 
-
-            Debug.WriteLine(PicturePath);          
+            movie.PosterPath = Path.Combine("img", "posters", Image.FileName);
             dbContext.Movies.Add(movie);
             dbContext.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
 
         // GET: MovieController/Edit/5
         public ActionResult Edit(int id)
@@ -137,7 +137,7 @@ namespace MoviesUI.Controllers
 		[HttpGet]
         public FileContentResult GetImage(int id)
 		{
-            var item = dbContext.Movies?.Find(id);
+            var item = dbContext.Movies.Find(id);
             var path = Path.Combine(_webHostEnvironment.WebRootPath, item.PosterPath);
             var byteArray = System.IO.File.ReadAllBytes(path);
             return new FileContentResult(byteArray, "image/jpeg");
