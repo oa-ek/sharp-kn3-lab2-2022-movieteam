@@ -20,6 +20,7 @@ namespace MoviesCore
         public virtual ICollection<Genre>? Genres { get; set; } = new List<Genre>();
         public virtual ICollection<Director>? Directors { get; set; } = new List<Director>();
         public virtual ICollection<Actor>? Actors { get; set; } = new List<Actor>();
+        public virtual ICollection<User>? Users { get; set; } = new List<User>();
 
         public override string ToString()
         {

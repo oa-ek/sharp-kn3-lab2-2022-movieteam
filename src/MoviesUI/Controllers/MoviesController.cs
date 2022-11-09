@@ -158,5 +158,13 @@ namespace MoviesUI.Controllers
             dbContext.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
+        public ActionResult AddBookmark(int id)
+        {
+            User currentUser = dbContext.Users.Include(x => x.Movies).FirstOrDefault(x => x.UserName == User.Identity.Name);
+            currentUser.Movies.Add(dbContext.Movies.FirstOrDefault(x => x.Id == id));
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
