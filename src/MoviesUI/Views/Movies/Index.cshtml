@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<MoviesCore.Movie>
-<div class="row-cols-auto">
+@*<div class="row-cols-auto">
 	<a class="nav-link text-dark text-center" asp-area="" asp-controller="Movies" asp-action="Create">Add new movie </a>
 </div>
 <div class="container">
@@ -34,6 +34,97 @@
 			</div>
 		}
 	</div>
-</div>
+</div>*@
+<!-- Product Section Begin -->
+<section class="product spad">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="trending__product">
+					<div class="row">
+						<div class="col-lg-8 col-md-8 col-sm-8">
+							<div class="section-title">
+								<h4>Trending Now</h4>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4">
+							<div class="btn__all">
+								<a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						@foreach (var item in Model)
+						{
+							<div class="col-lg-4 col-md-6 col-sm-6">
+								<div class="product__item">
+									<div class="product__item__pic set-bg">
+										<img src="@item.PosterPath" style="width:230px;height:325px" />
+									</div>
+									<div class="product__item__text">
+										<ul>
+											<li><a asp-action="Delete" asp-route-id="@item.Id" style="text-decoration:none">Delete</a></li>
+											<li><a asp-action="Edit" asp-route-id="@item.Id" style="text-decoration:none">Edit</a></li>
+										</ul>
+										<h5><a asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none">@item.Title</a></h5>
+									</div>
+								</div>
+							</div>
+						}
 
+					</div>
+				</div>
+			</div>
 
+			<div class="col-lg-4 col-md-6 col-sm-8">
+				<div class="product__sidebar">
+					<div class="product__sidebar__view">
+						<div class="section-title">
+							<h5>Top Views</h5>
+						</div>
+						<ul class="filter__controls">
+							<li class="active" data-filter="*">Day</li>
+							<li data-filter=".week">Week</li>
+							<li data-filter=".month">Month</li>
+							<li data-filter=".years">Years</li>
+						</ul>
+						<div class="filter__gallery">
+							<div class="product__sidebar__view__item set-bg mix day years"
+								 data-setbg="img/sidebar/tv-1.jpg">
+								<div class="ep">18 / ?</div>
+								<div class="view"><i class="fa fa-eye"></i> 9141</div>
+								<h5><a href="#">Boruto: Naruto next generations</a></h5>
+							</div>
+							<div class="product__sidebar__view__item set-bg mix month week"
+								 data-setbg="img/sidebar/tv-2.jpg">
+								<div class="ep">18 / ?</div>
+								<div class="view"><i class="fa fa-eye"></i> 9141</div>
+								<h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+							</div>
+							<div class="product__sidebar__view__item set-bg mix week years"
+								 data-setbg="img/sidebar/tv-3.jpg">
+								<div class="ep">18 / ?</div>
+								<div class="view"><i class="fa fa-eye"></i> 9141</div>
+								<h5><a href="#">Sword art online alicization war of underworld</a></h5>
+							</div>
+							<div class="product__sidebar__view__item set-bg mix years month"
+								 data-setbg="img/sidebar/tv-4.jpg">
+								<div class="ep">18 / ?</div>
+								<div class="view"><i class="fa fa-eye"></i> 9141</div>
+								<h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
+							</div>
+							<div class="product__sidebar__view__item set-bg mix day"
+								 data-setbg="img/sidebar/tv-5.jpg">
+								<div class="ep">18 / ?</div>
+								<div class="view"><i class="fa fa-eye"></i> 9141</div>
+								<h5><a href="#">Fate stay night unlimited blade works</a></h5>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Product Section End -->
