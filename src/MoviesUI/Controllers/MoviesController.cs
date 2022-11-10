@@ -14,12 +14,12 @@ namespace MoviesUI.Controllers
         private readonly MoviesDbContext dbContext;
         private readonly IWebHostEnvironment _webHostEnvironment;
         public MoviesController(MoviesDbContext dbContext, IWebHostEnvironment webHostEnvironment)
-		{
-			this.dbContext = dbContext;
-			_webHostEnvironment = webHostEnvironment;
-		}
-		// GET: MovieController
-		public ActionResult Index()
+        {
+            this.dbContext = dbContext;
+            _webHostEnvironment = webHostEnvironment;
+        }
+        // GET: MovieController
+        public ActionResult Index()
         {
             var MoviesWithEv = dbContext.Movies
                 .Include(x => x.Genres)
@@ -34,7 +34,7 @@ namespace MoviesUI.Controllers
             ViewData["GetMoviesDetails"] = movieSearch;
 
             var mquery = from x in dbContext.Movies select x;
-            if(!String.IsNullOrEmpty(movieSearch))
+            if (!String.IsNullOrEmpty(movieSearch))
             {
                 mquery = mquery.Where(x => x.Title.Contains(movieSearch));
             }
@@ -71,7 +71,7 @@ namespace MoviesUI.Controllers
         [HttpPost]
         public ActionResult Create(Movie movie, int[] selectedGenres, int selectedType, int selectedCountry, IFormFile Image)
         {
-            
+
             if (selectedGenres != null)
             {
                 movie.Genres = new List<Genre>();
@@ -90,7 +90,7 @@ namespace MoviesUI.Controllers
             }
 
             string PicturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "posters", Image.FileName);
-                using(FileStream stream = new FileStream(PicturePath, FileMode.Create))
+            using (FileStream stream = new FileStream(PicturePath, FileMode.Create))
                 Image.CopyTo(stream);
 
             movie.PosterPath = Path.Combine("img", "posters", Image.FileName);
@@ -113,7 +113,7 @@ namespace MoviesUI.Controllers
         [HttpPost]
         public ActionResult Edit(Movie movie, int[] selectedGenres)
         {
-            
+
             Movie edited = dbContext.Movies.Include(x => x.Genres).FirstOrDefault(x => x.Id == movie.Id);
             edited.Title = movie.Title;
             edited.Description = movie.Description;
@@ -134,14 +134,14 @@ namespace MoviesUI.Controllers
             dbContext.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-		[HttpGet]
+        [HttpGet]
         public FileContentResult GetImage(int id)
-		{
+        {
             var item = dbContext.Movies.Find(id);
             var path = Path.Combine(_webHostEnvironment.WebRootPath, item.PosterPath);
             var byteArray = System.IO.File.ReadAllBytes(path);
             return new FileContentResult(byteArray, "image/jpeg");
-		}
+        }
 
         // GET: MovieController/Delete/5
         [HttpGet]
@@ -156,6 +156,18 @@ namespace MoviesUI.Controllers
         {
             dbContext.Movies.Remove(dbContext.Movies.Find(id));
             dbContext.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult Bookmarked(int id)
+        {
+            var mov = dbContext.Movies.FirstOrDefault(x => x.Id == id);
+            var currentUser = dbContext.Users.Include(x => x.Movies).FirstOrDefault(x => x.UserName == User.Identity.Name);
+            if (mov != null && currentUser != null)
+            {
+                currentUser.Movies.Add(mov);
+                dbContext.SaveChanges();
+            }
             return RedirectToAction(nameof(Index));
         }
     }

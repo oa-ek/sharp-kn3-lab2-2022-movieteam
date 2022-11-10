@@ -8,7 +8,6 @@ namespace MoviesUI.Controllers
 {
     public class HomeController : Controller
     {
-
         private readonly MoviesDbContext dbContext;
         public HomeController(MoviesDbContext dbContext)
         {
@@ -16,15 +15,20 @@ namespace MoviesUI.Controllers
         }
 
         public IActionResult Index()
-        {
-            return View();
+        {   
+            // genre query | set to dropdown menu
+            var drama = from x in dbContext.Movies
+                        where x.Genres.Any(x => x.GenreName == "Drama")
+                        select x;
+            return View(drama.ToList());
         }
-        
+
         public IActionResult Privacy()
         {
             return View();
         }
-
+        
+            
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
