@@ -24,6 +24,10 @@ namespace MoviesCore
                 .HasMany(x => x.Actors)
                 .WithMany(x => x.Movies);
 
+            builder.Entity<User>()
+                .HasMany(x => x.Movies)
+                .WithMany(x => x.Users);
+
             builder.Seed();
             base.OnModelCreating(builder);
         }

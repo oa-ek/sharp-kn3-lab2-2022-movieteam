@@ -2,6 +2,11 @@
 @{
 }
 <div class="container">
+	<div class="row-cols-auto">
+		<a asp-action="Bookmarked" asp-route-id="@Model.Id" class="btn btn-warning">add to bookmark</a>
+	</div>
+</div>
+<div class="container">
 	<div class="row align-content-center">
 		<div class="col-6">
 			<img class="card-img-top" src="\@Html.DisplayFor(modelItem => Model.PosterPath)" width="100%" height="225" alt="Card image cap">
