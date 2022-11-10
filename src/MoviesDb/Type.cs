@@ -10,5 +10,9 @@ namespace MoviesCore
         public int Id { get; set; }
         public string? TypeName { get; set; }
         public virtual ICollection<Movie>? Movies { get; set; } = new List<Movie>();
+        public override string ToString()
+        {
+            return $"{TypeName}";
+        }
     }
 }

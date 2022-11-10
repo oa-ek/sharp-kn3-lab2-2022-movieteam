@@ -24,6 +24,7 @@ namespace MoviesUI.Controllers
             var MoviesWithEv = dbContext.Movies
                 .Include(x => x.Genres)
                 .Include(x => x.Country)
+                .Include(x => x.Type)
                 .ToList();
 
             return View(MoviesWithEv);
