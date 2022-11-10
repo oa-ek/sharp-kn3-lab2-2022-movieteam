@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
+using System.Reflection.Emit;
 
 namespace MoviesCore
 {
@@ -26,7 +28,7 @@ namespace MoviesCore
 
             builder.Entity<User>()
                 .HasMany(x => x.Movies)
-                .WithMany(x => x.Users);
+            .WithMany(x => x.Users);
 
             builder.Seed();
             base.OnModelCreating(builder);
@@ -37,5 +39,6 @@ namespace MoviesCore
         public DbSet<PublisherCountry>? PublisherCountries { get; set; }
         public DbSet<Actor>? Actors { get; set; }
         public DbSet<Type>? Types { get; set; }
+        public DbSet<Reccomendation> Reccomendations { get; set; }
     }
 }
