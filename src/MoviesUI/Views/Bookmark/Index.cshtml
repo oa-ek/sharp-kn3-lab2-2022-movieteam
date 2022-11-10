@@ -1,8 +1,4 @@
 ﻿
-@{
-} 
-@*For specialized quury*@
-<h1>Test</h1>
 @model IEnumerable<MoviesCore.Movie>
 @if(Model != null)
 {
@@ -15,6 +11,7 @@
 						<h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
 						<p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
 						<p class="card-text">@Html.DisplayFor(modelItem => item.Genres)</p>
+						<a asp-action="Remove" asp-route-id="@item.Id" class="btn btn-warning">Remove from bookmark</a>
 					</div>
 				</div>
 			</div>

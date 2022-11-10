@@ -8,7 +8,6 @@ namespace MoviesUI.Controllers
 {
     public class HomeController : Controller
     {
-
         private readonly MoviesDbContext dbContext;
         public HomeController(MoviesDbContext dbContext)
         {
@@ -16,28 +15,20 @@ namespace MoviesUI.Controllers
         }
 
         public IActionResult Index()
-        {
-            var currentUser = dbContext.Users.Include(x => x.Movies).FirstOrDefault(x => x.UserName == User.Identity.Name);
-            if (currentUser != null)
-            {
-                return View(currentUser.Movies.ToList());
-            }
-            return View();
+        {   
+            // genre query | set to dropdown menu
+            var drama = from x in dbContext.Movies
+                        where x.Genres.Any(x => x.GenreName == "Drama")
+                        select x;
+            return View(drama.ToList());
         }
 
         public IActionResult Privacy()
         {
             return View();
         }
-
-        public ActionResult Remove(int id)
-        {
-            var currentUser = dbContext.Users.Include(x => x.Movies).FirstOrDefault(x => x.UserName == User.Identity.Name);
-            currentUser?.Movies?.Remove(currentUser.Movies.FirstOrDefault(x => x.Id == id));
-            dbContext.SaveChanges();
-            return RedirectToAction(nameof(Index));
-        }
-
+        
+            
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
