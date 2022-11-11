@@ -8,8 +8,9 @@
 		color: white;
 		font-size: 20px;
 	}
-	#bewhite{
-		color:white;
+
+	#bewhite {
+		color: white;
 	}
 </style>
 
@@ -64,30 +65,30 @@
 					List<Genre> genres = ViewBag.Genres;
 					foreach (Genre c in genres)
 					{
-								<input type="checkbox" name="selectedGenres" value="@c.Id" />
-								@c.GenreName <br />
+						<input type="checkbox" name="selectedGenres" value="@c.Id" />
+						@c.GenreName <br />
 					}
 				}
 				<br />
 				<label class="control-label"> Choose Type</label>
 				@{
 					List<MoviesCore.Type> types = ViewBag.Types;
-							<select name="selectedType">
-								@foreach (var item in types)
+					<select name="selectedType">
+						@foreach (var item in types)
 						{
-									<option value="@item.Id">@item.TypeName</option>
+							<option value="@item.Id">@item.TypeName</option>
 						}
-							</select>
+					</select>
 				}
 				<label class="control-label"> Choose Country</label>
 				@{
 					List<PublisherCountry> countries = ViewBag.Contries;
-							<select name="selectedCountry">
-								@foreach (var item in countries)
+					<select name="selectedCountry">
+						@foreach (var item in countries)
 						{
-									<option value="@item.Id">@item.CountryName</option>
+							<option value="@item.Id">@item.CountryName</option>
 						}
-							</select>
+					</select>
 				}
 			</div>
 		</div>
