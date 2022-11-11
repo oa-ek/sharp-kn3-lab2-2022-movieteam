@@ -8,9 +8,14 @@
 		padding: 15px 30px;
 		width: 70%;
 	}
+
 	.reset {
-		text-decoration:none;
+		text-decoration: none;
 		padding: 10px
+	}
+
+	.btn-create {
+		width: 150px;
 	}
 </style>
 <section class="product spad">
@@ -21,8 +26,10 @@
 					<input class="styledInput" type="search" placeholder="enter query" value="@ViewData["GetMoviesDetails"]" name="movieSearch" />
 					<input type="submit" value="Search" class="btn btn-primary" />
 					<a class="reset" asp-action="Index">Reset</a>
+					<a asp-action="Create" class="btn btn-outline-info btn-create" style="text-decoration:none">Create</a>
 				</p>
 			</form>
+
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
