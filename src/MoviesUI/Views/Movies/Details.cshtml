@@ -68,7 +68,7 @@
 <!--  Section End -->
 @section Scripts {
 	@*Uncomment section below to load imdb raiting for this movie, due to restricted number of requests to api*@
-	@*<script>
+	<script>
 		const str = "@Model.Title"
 		console.log(str)
 		const options = {
@@ -83,8 +83,8 @@
 	fetch(`https://moviesdb5.p.rapidapi.com/om?t=${str}`, options)
 	.then(response => response.json())
 	.then(response => {
-		trgt.innerHTML = response.imdbRating ? "Imdb Rating :"+response.imdbRating : "No raiting for this movie :("
+		trgt.innerHTML = response.imdbRating ? response.imdbRating : "No raiting for this movie :("
 	})
 	.catch(err => console.error(err));
-	</script>*@
+	</script>
 	}
