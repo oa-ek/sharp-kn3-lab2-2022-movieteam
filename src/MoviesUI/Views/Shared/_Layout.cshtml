@@ -80,8 +80,7 @@
 				</div>
 				<div class="col-lg-2">
 					<div class="header__right">
-						<a href="#" class="search-switch"><span class="icon_search"></span></a>
-						<a href="./login.html"><span class="icon_profile"></span></a>
+						<partial name="_LoginPartial" />
 					</div>
 				</div>
 			</div>
@@ -99,16 +98,10 @@
 
 	<!-- Footer Section Begin -->
 	<!-- Footer Section End -->
-
+	<script src="https://kit.fontawesome.com/4b8960553e.js" crossorigin="anonymous"></script>
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
-	<script src="~js/player.js"></script>
-	<script src="~js/jquery.nice-select.min.js"></script>
-	<script src="~js/mixitup.min.js"></script>
-	<script src="~js/jquery.slicknav.js"></script>
-	<script src="~js/owl.carousel.min.js"></script>
-	<script src="~js/main.js"></script>
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
