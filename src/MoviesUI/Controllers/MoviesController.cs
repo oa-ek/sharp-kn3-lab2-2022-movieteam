@@ -89,7 +89,10 @@ namespace MoviesUI.Controllers
             {
                 movie.Country = dbContext.PublisherCountries.FirstOrDefault(x => x.Id == selectedCountry);
             }
-
+            if(movie.Type.TypeName == "Movie")
+			{
+                movie.Seasons = null;
+			}
             string PicturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "posters", Image.FileName);
             using (FileStream stream = new FileStream(PicturePath, FileMode.Create))
                 Image.CopyTo(stream);
