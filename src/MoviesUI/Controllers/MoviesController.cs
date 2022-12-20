@@ -172,7 +172,7 @@ namespace MoviesUI.Controllers
                 currentUser.Movies.Add(mov);
                 dbContext.SaveChanges();
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", new {id});
         }
     }
 }
