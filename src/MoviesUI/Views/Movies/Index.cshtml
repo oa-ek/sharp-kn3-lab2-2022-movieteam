@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MoviesCore.Movie>
+﻿@using MoviesCore
+@model IEnumerable<MoviesCore.Movie>
 
 <!-- Product Section Begin -->
 <style>
@@ -17,6 +18,22 @@
 	.btn-create {
 		width: 150px;
 	}
+
+	.countryContainer {
+		color: #fff;
+		padding: 15px 0;
+		border-radius: 15px;
+	}
+
+	.country__select {
+		border-radius: 15px;
+		padding: 10px 30px
+	}
+
+	.chechBox {
+		padding: 10px 0;
+		color: #fff;
+	}
 </style>
 <section class="product spad">
 	<div class="container">
@@ -24,6 +41,30 @@
 			<form method="get" asp-action="Index">
 				<p>
 					<input class="styledInput" type="search" placeholder="enter query" value="@ViewData["GetMoviesDetails"]" name="movieSearch" />
+					<div class="countryContainer">
+						<label class="control-label"> Choose Country</label>
+						@{
+							List<PublisherCountry> countries = ViewBag.Contries;
+							<select class="country__select" name="selectedCountry">
+								@foreach (var item in countries)
+								{
+									<option value="@item.Id">@item.CountryName</option>
+								}
+							</select>
+
+						}
+					</div>
+					<div class="chechBox">
+						@{
+							List<Genre> genres = ViewBag.Genres;
+							foreach (Genre c in genres)
+							{
+								<input type="checkbox" name="selectedGenres" value="@c.Id" />
+								@c.GenreName <br />
+							}
+						}
+					</div>
+
 					<input type="submit" value="Search" class="btn btn-primary" />
 					<a class="reset" asp-action="Index">Reset</a>
 					<a asp-action="Create" class="btn btn-outline-info btn-create" style="text-decoration:none">Create</a>
