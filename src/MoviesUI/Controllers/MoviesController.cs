@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MoviesCore;
 using MoviesRepository;
+using MoviesUI.Models;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace MoviesUI.Controllers
@@ -17,6 +19,7 @@ namespace MoviesUI.Controllers
         {
             this.dbContext = dbContext;
             _webHostEnvironment = webHostEnvironment;
+
         }
         // GET: MovieController
         public ActionResult Index()
@@ -30,15 +33,44 @@ namespace MoviesUI.Controllers
             return View(MoviesWithEv);
         }
         [HttpGet]
-        public async Task<IActionResult> Index(string movieSearch)
+        public async Task<IActionResult> Index(string movieSearch, int selectedCountry, int[] selectedGenres)
         {
             ViewData["GetMoviesDetails"] = movieSearch;
-
+            ViewBag.Contries = dbContext.PublisherCountries.ToList();
+            ViewBag.Genres = dbContext.Genres.ToList();
             var mquery = from x in dbContext.Movies select x;
             if (!String.IsNullOrEmpty(movieSearch))
             {
                 mquery = mquery.Where(x => x.Title.Contains(movieSearch));
+                //mquery = mquery.Where(x => x.Country.CountryName.Contains(country));
             }
+            try
+            {
+                var countryN = dbContext.PublisherCountries.FirstOrDefault(x => x.Id == selectedCountry).CountryName;
+                mquery = mquery.Where(x => x.Country.CountryName.Contains(countryN));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            try
+            {
+                if (selectedGenres != null)
+                {
+
+                    foreach (var g in dbContext.Genres.Where(ge => selectedGenres.Contains(ge.Id)))
+                    {
+                        mquery = mquery.Where(x => x.Genres.Contains(g));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+
+
             return View(await mquery.Include(x => x.Genres).ToListAsync());
         }
         // GET: MovieController/Details/5
@@ -85,14 +117,14 @@ namespace MoviesUI.Controllers
             {
                 movie.Type = dbContext.Types.FirstOrDefault(x => x.Id == selectedType);
             }
-            if (selectedType != 0)
+            if (selectedCountry != 0)
             {
                 movie.Country = dbContext.PublisherCountries.FirstOrDefault(x => x.Id == selectedCountry);
             }
-            if(movie.Type.TypeName == "Movie")
-			{
+            if (movie.Type.TypeName == "Movie")
+            {
                 movie.Seasons = null;
-			}
+            }
             string PicturePath = Path.Combine(_webHostEnvironment.WebRootPath, "img", "posters", Image.FileName);
             using (FileStream stream = new FileStream(PicturePath, FileMode.Create))
                 Image.CopyTo(stream);
@@ -173,6 +205,51 @@ namespace MoviesUI.Controllers
                 dbContext.SaveChanges();
             }
             return RedirectToAction("Details", new {id});
+        }
+        [HttpGet]
+        public  ActionResult CreateIMDB()
+        {          
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> CreateIMDB(string imdbId)
+        {
+            
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string response = await client.GetStringAsync($"http://www.omdbapi.com/?apikey=5683dfc2&i={imdbId}");
+                    var json = JsonConvert.DeserializeObject<IMDBDto>(response);
+                    if (json != null)
+                    {
+                        var movie = new Movie
+                        {
+                            Title = json.Title,
+                            ReleaseYear = (int)json.Year,
+                            Description = json.Plot,
+                            PosterPath = json.Poster,
+                            Rating = json.imdbRating
+
+                        };
+
+                        dbContext.Movies.Add(movie);
+                        dbContext.SaveChanges();
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
