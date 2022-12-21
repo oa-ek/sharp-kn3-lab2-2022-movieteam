@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<style>
+	.pre__container {
+		display: flex;
+		justify-content: space-around;
+		margin-top : 30px
+	}
+
+	.stlInput {
+		padding: 10px 30px;
+		margin: 15px 0;
+		border-radius: 15px;
+	}
+
+	.text-field {
+		color: #fff;
+	}
+	.btn_create {
+;		margin: 20px 0 10px 15px;
+	}
+</style>
+
+<div class="pre__container ">
+
+	<form class="" asp-action="CreateIMDB">
+		<div class="text-field">Enter imdb Id to create using IMDB</div>
+		<input class="stlInput" placeholder="Example: tt0048954" name="imdbId" />
+		<input type="submit" value="Create" class="btn btn-outline-success float-right btn_create" />
+	</form>
+</div>

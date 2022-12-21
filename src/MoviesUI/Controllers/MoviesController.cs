@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MoviesCore;
 using MoviesRepository;
+using MoviesUI.Models;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace MoviesUI.Controllers
@@ -17,6 +19,7 @@ namespace MoviesUI.Controllers
         {
             this.dbContext = dbContext;
             _webHostEnvironment = webHostEnvironment;
+
         }
         // GET: MovieController
         public ActionResult Index()
@@ -201,6 +204,51 @@ namespace MoviesUI.Controllers
                 currentUser.Movies.Add(mov);
                 dbContext.SaveChanges();
             }
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public  ActionResult CreateIMDB()
+        {          
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> CreateIMDB(string imdbId)
+        {
+            
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string response = await client.GetStringAsync($"http://www.omdbapi.com/?apikey=5683dfc2&i={imdbId}");
+                    var json = JsonConvert.DeserializeObject<IMDBDto>(response);
+                    if (json != null)
+                    {
+                        var movie = new Movie
+                        {
+                            Title = json.Title,
+                            ReleaseYear = (int)json.Year,
+                            Description = json.Plot,
+                            PosterPath = json.Poster,
+                            Rating = json.imdbRating
+
+                        };
+
+                        dbContext.Movies.Add(movie);
+                        dbContext.SaveChanges();
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
             return RedirectToAction(nameof(Index));
         }
     }
