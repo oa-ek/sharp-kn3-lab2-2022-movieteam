@@ -33,7 +33,7 @@ namespace MoviesUI.Controllers
             return View(MoviesWithEv);
         }
         [HttpGet]
-        public async Task<IActionResult> Index(string movieSearch, int selectedCountry, int[] selectedGenres)
+        public async Task<IActionResult> Index(string movieSearch, int selectedCountry, int[] selectedGenres, int selectedYear)
         {
             ViewData["GetMoviesDetails"] = movieSearch;
             ViewBag.Contries = dbContext.PublisherCountries.ToList();
@@ -69,6 +69,19 @@ namespace MoviesUI.Controllers
                 Console.WriteLine(ex);
             }
 
+            try
+            {
+                if (selectedYear > 0)
+                {
+                    mquery = mquery.Where(x => x.ReleaseYear == selectedYear);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
 
 
             return View(await mquery.Include(x => x.Genres).ToListAsync());
@@ -204,18 +217,18 @@ namespace MoviesUI.Controllers
                 currentUser.Movies.Add(mov);
                 dbContext.SaveChanges();
             }
-            return RedirectToAction("Details", new {id});
+            return RedirectToAction("Details", new { id });
         }
         [HttpGet]
-        public  ActionResult CreateIMDB()
-        {          
+        public ActionResult CreateIMDB()
+        {
 
             return View();
         }
         [HttpPost]
         public async Task<ActionResult> CreateIMDB(string imdbId)
         {
-            
+
             try
             {
                 using (HttpClient client = new HttpClient())
